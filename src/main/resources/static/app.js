@@ -9,17 +9,17 @@ function setConnected(connected) {
     else {
         $("#conversation").hide();
     }
-    $("#greetings").html("");
+    $("#messages").html("");
 }
 
 function connect() {
-    var socket = new SockJS('/gs-guide-websocket');
+    var socket = new SockJS('/stomp-websocket');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/greetings', function (greeting) {
-            showMessage(JSON.parse(greeting.body).sender,JSON.parse(greeting.body).content);
+        stompClient.subscribe('/chat/client', function (message) {
+            showMessage(JSON.parse(message.body).sender,JSON.parse(message.body).content);
         });
     });
 }
@@ -33,14 +33,14 @@ function disconnect() {
 }
 
 function sendName() {
-    stompClient.send("/app/hello", {}, JSON.stringify({'sender': $("#name").val(), 'content': ''}));
+    stompClient.send("/chat-app/server", {}, JSON.stringify({'sender': $("#name").val(), 'content': ''}));
 }
 function sendMessage(){
-    stompClient.send("/app/hello", {}, JSON.stringify({'sender': $("#name").val(),'content':$("#message").val()}));
+    stompClient.send("/chat-app/server", {}, JSON.stringify({'sender': $("#name").val(),'content':$("#message").val()}));
 }
 
 function showMessage(sender,message) {
-    $("#greetings").append("<tr><td>" + sender + ": " + message + "</td></tr>");
+    $("#messages").append("<tr><td>" + sender + ": " + message + "</td></tr>");
 }
 
 $(function () {

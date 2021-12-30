@@ -7,9 +7,9 @@ import org.springframework.web.util.HtmlUtils;
 
 @Controller
 public class GreetingController {
-    @MessageMapping("/hello")
-    @SendTo("/topic/greetings")
-    public Message greeting(Message message) throws Exception{
+    @MessageMapping("/server")
+    @SendTo("/chat/client")
+    public Message greeting(Message message){
 
         return new Message( HtmlUtils.htmlEscape(message.getSender()), HtmlUtils.htmlEscape(message.getContent()));
     }
