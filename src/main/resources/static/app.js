@@ -18,7 +18,7 @@ function connect() {
     stompClient.connect({}, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/chat/client', function (message) {
+        stompClient.subscribe('/chat/client/'+$("#chatID").val(), function (message) {
             showMessage(JSON.parse(message.body).sender,JSON.parse(message.body).content);
         });
     });
@@ -33,10 +33,10 @@ function disconnect() {
 }
 
 function sendName() {
-    stompClient.send("/chat-app/server", {}, JSON.stringify({'sender': $("#name").val(), 'content': ''}));
+    stompClient.send("/chat-app/server/"+$("#chatID").val(), {}, JSON.stringify({'sender': $("#name").val(), 'content': ''}));
 }
 function sendMessage(){
-    stompClient.send("/chat-app/server", {}, JSON.stringify({'sender': $("#name").val(),'content':$("#message").val()}));
+    stompClient.send("/chat-app/server/"+$("#chatID").val(), {}, JSON.stringify({'sender': $("#name").val(),'content':$("#message").val()}));
 }
 
 function showMessage(sender,message) {
