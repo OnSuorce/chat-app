@@ -5,11 +5,11 @@ import com.example.demo.enumeration.SystemMessageType;
 public class SystemMessage {
 
     SystemMessageType type;
-    String username;
+    String content;
 
     public SystemMessage(SystemMessageType type, String username) {
         this.type = type;
-        this.username = username;
+        this.content = username;
     }
 
     public SystemMessageType getType() {
@@ -21,18 +21,18 @@ public class SystemMessage {
     }
 
     public String getUsername() {
-        return username;
+        return content;
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.content = username;
     }
 
     @Override
     public String toString() {
         return "SystemMessage{" +
                 "type=" + type +
-                ", username='" + username + '\'' +
+                ", username='" + content + '\'' +
                 '}';
     }
 }
