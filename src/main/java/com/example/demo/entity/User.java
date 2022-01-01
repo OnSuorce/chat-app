@@ -28,7 +28,7 @@ public class User {
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "userID")
-    private Set<UserInChat> featureList = new HashSet<>();
+    private Set<UserInChat> UserChats= new HashSet<>();
 
     public User(){}
 
@@ -72,6 +72,14 @@ public class User {
         this.surname = surname;
     }
 
+    public Set<UserInChat> getUserChats() {
+        return UserChats;
+    }
+
+    public void setUserChats(Set<UserInChat> userChats) {
+        UserChats = userChats;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -94,5 +102,12 @@ public class User {
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 '}';
+    }
+
+    public User(String username, String password, String name, String surname) {
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.surname = surname;
     }
 }
