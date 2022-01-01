@@ -49,15 +49,13 @@ public class UserDaoTests {
     @Test
     //@Transactional(rollbackOn = Exception.class)
     void updateUser(){
-        try {
+
             User user = usersDao.findByUsername("giorgy");
             user.setName("Mauro");
             usersDao.save(user);
             assertEquals("Mauro",user.getName());
 
-        }catch (Exception ex){
-            System.out.println(ex.getMessage());
-        }
+
 
     }
 }

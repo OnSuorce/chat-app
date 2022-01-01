@@ -1,7 +1,9 @@
 package com.example.demo.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "chats")
@@ -14,6 +16,10 @@ public class Chat {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "groupID", nullable = true)
     private Group groupID;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "chatID")
+    private Set<UserInChat> UserInChatList = new HashSet<>();
 
     public Chat(){}
     public int getId() {
@@ -43,5 +49,13 @@ public class Chat {
     @Override
     public int hashCode() {
         return Objects.hash(id, groupID);
+    }
+
+    public Set<UserInChat> getUserInChatList() {
+        return UserInChatList;
+    }
+
+    public void setUserInChatList(Set<UserInChat> userInChatList) {
+        UserInChatList = userInChatList;
     }
 }

@@ -1,6 +1,9 @@
 package com.example.demo.service;
 
+import com.example.demo.dao.ChatsDao;
+import com.example.demo.dao.MessagesDao;
 import com.example.demo.dao.UsersDao;
+import com.example.demo.dao.UsersInChatDao;
 import com.example.demo.entity.User;
 import com.example.demo.util.UserBuilder;
 import com.mysql.cj.exceptions.DataTruncationException;
@@ -11,31 +14,52 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.NoSuchElementException;
 
 @Service
-public class ChatService {
-    private Logger log = LogManager.getLogger(ChatService.class);
+public class UsersService {
+    private Logger log = LogManager.getLogger(UsersService.class);
 
     @Autowired
     UsersDao usersDao;
 
+//    @Autowired
+//    MessagesDao messagesDao;
+//
+//    @Autowired
+//    UsersInChatDao usersInChatDao;
+//
+//    @Autowired
+//    ChatsDao chatsDao;
+
+    //User
+    @Transactional(rollbackOn = Exception.class)
     public User getUser(int id){
-        return usersDao.getById(id);
+        User user = null;
+        try {
+            user = usersDao.findById(id).get();
+        }catch (NoSuchElementException ex){
+            log.error("Error while searching user by id: {}", id);
+        }
+        return user;
+
     }
 
+    @Transactional(rollbackOn = Exception.class)
     public User getUser(String username){
         return usersDao.findByUsername(username);
     }
 
+    @Transactional(rollbackOn = Exception.class)
     public User getUser(String name, String surname){
         return usersDao.findByNameAndSurname(name,surname);
     }
 
+    @Transactional(rollbackOn = Exception.class)
     public boolean usernameAvailable(String username){
         if(getUser(username) == null)return false;
         return true;
     }
-
 
     @Transactional(rollbackOn = Exception.class)
     public void saveUser(String username, String password, String name, String surname) throws SQLIntegrityConstraintViolationException, DataTruncationException{
@@ -73,6 +97,7 @@ public class ChatService {
         dbuser.setPassword(user.getPassword());
         usersDao.save(dbuser);
     }
+
 
 
 }
