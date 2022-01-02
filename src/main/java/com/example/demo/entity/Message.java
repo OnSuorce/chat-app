@@ -82,4 +82,12 @@ public class Message {
     public int hashCode() {
         return Objects.hash(content, timestamp, senderID, chatID);
     }
+
+    public Message(int id, String content, Date timestamp, User senderID, Chat chatID) {
+        this.id = id;
+        this.content = content;
+        this.timestamp = timestamp;
+        this.senderID = senderID;
+        this.chatID = chatID;
+    }
 }
