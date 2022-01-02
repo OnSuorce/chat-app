@@ -17,7 +17,7 @@ public class Chat {
     @JoinColumn(name = "groupID", nullable = true)
     private Group groupID;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "chatID")
     private Set<UserInChat> UserInChatList = new HashSet<>();
 

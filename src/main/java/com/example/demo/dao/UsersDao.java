@@ -10,7 +10,7 @@ public interface UsersDao extends JpaRepository<User, Integer> {
     User findByName(String name);
     User findBySurname(String surname);
     User findByUsername(String username);
-    User findByNameAndSurname(String name, String Username);
+    User findByNameAndSurname(String name, String surname);
 
 
 }
