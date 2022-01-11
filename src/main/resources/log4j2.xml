@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN">
+<Configuration status="INFO">
 	<Appenders>
 		<Console name="Console" target="SYSTEM_OUT">
 			<PatternLayout
@@ -10,7 +10,7 @@
 		<Root level="debug">
 			<AppenderRef ref="Console" />
 		</Root>
-		<Logger name="org.hibernate" level="INFO">
+		<Logger name="org.hibernate" level="DEBUG">
 			<Appender-ref ref="Console"/>
 		</Logger>
 		
