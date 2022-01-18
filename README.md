@@ -6,6 +6,7 @@ The goal of this project is to challenge myself to make a working chat applicati
 
 - [x] Implement chat rooms
 - [x] Add database to save users, messages and chat rooms
-- [ ] Implement registration for users and creation of chat groups
-- [ ] Implement private messages
+- [x] Implement registration for users and creation of chat groups
+- [x] Implement private messages
+- [ ] Implemente rest controllers and web sockets
 - [ ] Rewrite front-end with Angular
